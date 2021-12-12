@@ -6,11 +6,6 @@ import okhttp3.Interceptor
 import okhttp3.Response
 
 
-/**
- * Created by Javier Camarero on 14/05/2020.
- * QUADRAM MOBILE SOLUTIONS
- * jcamarero@quadram.mobi
- */
 class HeadersInterceptor(private val prefs: SharedPreferences) : Interceptor {
     companion object {
         const val OS = "os"

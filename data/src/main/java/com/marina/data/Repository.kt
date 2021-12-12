@@ -20,11 +20,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-/**
- * Created by Javier Camarero on 23/09/2020.
- * QUADRAM MOBILE SOLUTIONS
- * jcamarero@quadram.mobi
- */
 class Repository(
     private val restApi: RestApi,
     private val responseHandler: ResponseHandler,
