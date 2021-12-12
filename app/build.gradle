@@ -1,0 +1,78 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    buildFeatures {
+        dataBinding true
+    }
+    compileSdkVersion project.ext.globalCompileSdkVersion
+    buildToolsVersion project.ext.globalBuildToolsVersion
+
+    defaultConfig {
+        applicationId "com.marina.crudapp"
+        minSdkVersion project.ext.globalMinSdkVersion
+        targetSdkVersion project.ext.globalTargetSdkVersion
+        versionName project.ext.globalVersionName
+        versionCode project.ext.globalVersionCode
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        prepro {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+            debuggable true
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+            debuggable true
+            versionNameSuffix ".debug"
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    applicationVariants.all {
+        variant ->
+            variant.outputs.each {
+                output ->
+                    def formattedDate = new Date().format('dd-MM-yyyy')
+                    def name = "CRUDApp_${variant.versionName}_${formattedDate}.apk"
+                    output.outputFileName = name
+            }
+    }
+
+    androidExtensions {
+        features = ["parcelize"]
+    }
+}
+
+dependencies {
+    implementation project(":data")
+
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'com.google.android.material:material:1.4.0'
+
+    def lifecycle_version = "2.4.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+
+}

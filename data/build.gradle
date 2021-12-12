@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion project.ext.globalCompileSdkVersion
+    buildToolsVersion project.ext.globalBuildToolsVersion
+
+    buildTypes {
+        release {
+            buildConfigField("String", "API_URL", API_URL)
+            buildConfigField("String", "VERSION_NAME", "\""+project.ext.globalVersionName+"\"")
+        }
+        prepro {
+            buildConfigField("String", "API_URL", API_URL_PRE)
+            buildConfigField("String", "VERSION_NAME", "\""+project.ext.globalVersionName+"\"")
+        }
+        debug {
+            buildConfigField("String", "API_URL", API_URL_DEV)
+            buildConfigField("String", "VERSION_NAME", "\""+project.ext.globalVersionName+"\"")
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    api project(":domain")
+
+    def retrofit = "2.8.1"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.6.0"
+
+    def koin_version = "3.1.2"
+    api "io.insert-koin:koin-android:$koin_version"
+    api "io.insert-koin:koin-core:$koin_version"
+
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}

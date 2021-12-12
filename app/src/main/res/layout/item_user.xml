@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="itemObject"
+            type="com.marina.domain.dto.user.User" />
+
+        <variable
+            name="viewModel"
+            type="com.marina.crudapp.usecases.main.MainViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{(view) -> viewModel.clickItem.invoke(itemObject, view)}">
+
+        <TextView
+            android:id="@+id/txtID"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="12dp"
+            android:layout_margin="20dp"
+            setText="@{itemObject.id}"
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="1094"/>
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="12dp"
+            android:layout_margin="20dp"
+            setText="@{itemObject.name}"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/txtID"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Nombre Usuario"/>
+
+        <TextView
+            android:id="@+id/txtBirthdate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="12dp"
+            android:layout_margin="20dp"
+            setText="@{itemObject.birthdate}"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/txtName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="2001-01-01T00:00:00"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@color/colorGrey857"
+            app:layout_constraintTop_toBottomOf="@+id/txtBirthdate"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
