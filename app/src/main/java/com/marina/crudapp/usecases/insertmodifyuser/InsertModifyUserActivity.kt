@@ -31,10 +31,12 @@ class InsertModifyUserActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_insert_modify_user)
 
         binding.viewModel = viewModel
+
         binding.user = intent.getParcelableExtra<UserParcelable>(PARAM_USER)?.toUndoParcelable()
         isModify = intent.getBooleanExtra(PARAM_IS_MODIFY, false)
+        binding.isModify = isModify
 
-        with(viewModel){
+            with(viewModel){
             finishAction = ::finish
             dismissAction = ::finish
             clickView = ::handleClicks
