@@ -16,9 +16,9 @@ interface RestApi {
     @DELETE("$USER/{id}")
     suspend fun deleteUser(@Path("id") idUser: String): Response<Unit>
 
-    @POST("$USER/{id}")
+    @POST("$USER")
     suspend fun insertUser(@Body user: UserRequest): Response<Unit>
 
-    @PUT("$USER/{id}")
+    @PUT("$USER")
     suspend fun modifyUser(@Body user: UserRequest): Response<Unit>
 }

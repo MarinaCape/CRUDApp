@@ -33,6 +33,7 @@
                 android:background="@drawable/sp_underline_white"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
+                android:textCursorDrawable="@null"
                 android:drawableStart="@drawable/ic_search"
                 android:focusable="true"
                 android:singleLine="true"
